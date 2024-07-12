@@ -35,11 +35,13 @@ canvas.addEventListener('mousemove', (event) => {
 });
 
 canvas.addEventListener('touchstart', (event) => {
+    event.preventDefault();
     touchHold = true;
     draw(event.touches[0]);
 });
 canvas.addEventListener('touchend', () => touchHold = false);
 canvas.addEventListener('touchmove', (event) => {
+    event.preventDefault();
     if (touchHold && (drawingMode === 'obstacle' || drawingMode === 'erase')) {
         draw(event.touches[0]);
     }
@@ -47,8 +49,8 @@ canvas.addEventListener('touchmove', (event) => {
 
 function draw(event) {
     const rect = canvas.getBoundingClientRect();
-    const x = Math.floor((event.clientX - rect.left) / cellSize);
-    const y = Math.floor((event.clientY - rect.top) / cellSize);
+    const x = Math.floor((event.clientX - rect.left) * (canvas.width / rect.width) / cellSize);
+    const y = Math.floor((event.clientY - rect.top) * (canvas.height / rect.height) / cellSize);
 
     if (x < 0 || x >= cols || y < 0 || y >= rows) {
         return;
@@ -180,6 +182,7 @@ function clearMaze() {
     drawGrid();
     console.log('Clearing maze');
     document.getElementById('visitedCount').innerText = 'Visited Squares: 0';
+    // Do not clear algorithm info to preserve description
 }
 
 function clearPath() {
