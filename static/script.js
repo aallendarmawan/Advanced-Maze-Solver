@@ -11,6 +11,7 @@ let currentPath = [];
 let drawPathTimeout = null;
 let visitedCount = 0;
 let mouseDown = false;
+let touchHold = false;
 
 const algorithmDescriptions = {
     'select': 'Please select an algorithm to see its description.',
@@ -30,6 +31,17 @@ canvas.addEventListener('mouseup', () => mouseDown = false);
 canvas.addEventListener('mousemove', (event) => {
     if (mouseDown && (drawingMode === 'obstacle' || drawingMode === 'erase')) {
         draw(event);
+    }
+});
+
+canvas.addEventListener('touchstart', (event) => {
+    touchHold = true;
+    draw(event.touches[0]);
+});
+canvas.addEventListener('touchend', () => touchHold = false);
+canvas.addEventListener('touchmove', (event) => {
+    if (touchHold && (drawingMode === 'obstacle' || drawingMode === 'erase')) {
+        draw(event.touches[0]);
     }
 });
 
@@ -215,16 +227,17 @@ function drawPath(path) {
 }
 
 function solveMaze() {
-    if (!start || goals.length === 0) {
-        alert('Please set both start and goal positions');
-        return;
-    }
-    clearPath();
     const algorithm = document.getElementById('algorithmSelect').value;
     if (algorithm === 'select') {
         alert('Please select a search algorithm before solving the maze.');
         return;
     }
+
+    if (!start || goals.length === 0) {
+        alert('Please set both start and goal positions');
+        return;
+    }
+    clearPath();
     const data = {
         maze,
         start: { x: start.x, y: start.y },
@@ -263,6 +276,9 @@ function displayAlgorithmInfo() {
     document.getElementById('algorithmInfo').innerText = info;
 }
 
+function clearAlgorithmInfo() {
+    document.getElementById('algorithmInfo').innerText = '';
+}
 
 function highlightButton(buttonLabel) {
     const buttons = document.querySelectorAll('.controls button');
