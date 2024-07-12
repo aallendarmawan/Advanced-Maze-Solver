@@ -1,2 +1,2 @@
 # maze-ai-solver
-DFS, BFS
+[DEMO](https://advanced-maze-solver-633475e6fd37.herokuapp.com)
