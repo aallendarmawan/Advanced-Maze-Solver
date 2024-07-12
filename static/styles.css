@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e1e1e; /* Dark background */
+    color: #f4f4f4; /* Light text color */
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+canvas {
+    border: 1px solid #f4f4f4; /* Light border for canvas */
+    margin-bottom: 20px;
+    background-color: white; /* Keep the grid background white for contrast */
+}
+
+.controls {
+    margin-top: 10px;
+}
+
+button, select, input {
+    margin: 5px;
+    background-color: #2e2e2e; /* Darker background for controls */
+    color: #f4f4f4; /* Light text color */
+    border: 1px solid #f4f4f4; /* Light border */
+}
+
+button.selected {
+    background-color: #4e4e4e; /* Slightly lighter background for selected buttons */
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    color: #f4f4f4; /* Light text color */
+}
+
+footer a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
