@@ -11,23 +11,30 @@
         <h1>Maze Solver</h1>
         <canvas id="mazeCanvas" width="500" height="500"></canvas>
         <div class="controls">
-            <button onclick="setStart()">Set Start</button>
-            <button onclick="setGoal()">Set Goal</button>
-            <button onclick="setObstacle()">Add Obstacle</button>
-            <button onclick="erase()">Erase</button>
-            <button onclick="generateMaze()">Generate Random Maze</button>
-            <button onclick="clearMaze()">Clear Maze</button>
-            <select id="algorithmSelect" onchange="displayAlgorithmInfo()">
-                <option value="dfs">DFS</option>
-                <option value="bfs">BFS</option>
-                <option value="astar">A*</option>
-                <option value="random_walk">Random Walk</option>
-            </select>
-            <button onclick="solveMaze()">Solve Maze</button>
-            <label for="gridRows">Rows:</label>
-            <input type="number" id="gridRows" value="20" min="5" max="50" onchange="changeGridSize()">
-            <label for="gridCols">Cols:</label>
-            <input type="number" id="gridCols" value="20" min="5" max="50" onchange="changeGridSize()">
+            <div class="control-group">
+                <button onclick="setStart()">Set Start</button>
+                <button onclick="setGoal()">Set Goal</button>
+                <button onclick="setObstacle()">Add Obstacle</button>
+                <button onclick="erase()">Erase</button>
+            </div>
+            <div class="control-group">
+                <button onclick="generateMaze()">Generate Random Maze</button>
+                <button onclick="clearMaze()">Clear Maze</button>
+                <select id="algorithmSelect" onchange="displayAlgorithmInfo()">
+                    <option value="select">Select search algorithm</option>
+                    <option value="dfs">DFS</option>
+                    <option value="bfs">BFS</option>
+                    <option value="astar">A*</option>
+                    <option value="random_walk">Random Walk</option>
+                </select>
+                <button onclick="solveMaze()">Solve Maze</button>
+            </div>
+            <div class="control-group">
+                <label for="gridRows">Rows:</label>
+                <input type="number" id="gridRows" value="20" min="5" max="50" onchange="changeGridSize()">
+                <label for="gridCols">Cols:</label>
+                <input type="number" id="gridCols" value="20" min="5" max="50" onchange="changeGridSize()">
+            </div>
         </div>
         <p id="visitedCount">Visited Squares: 0</p>
         <p id="algorithmInfo"></p>

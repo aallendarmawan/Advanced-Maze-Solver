@@ -13,10 +13,15 @@ let visitedCount = 0;
 let mouseDown = false;
 
 const algorithmDescriptions = {
-    'dfs': 'Depth-First Search (DFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the root (selecting some arbitrary node as the root in the case of a graph) and explores as far as possible along each branch before backtracking.',
-    'bfs': 'Breadth-First Search (BFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root (or some arbitrary node of a graph, sometimes referred to as a "search key") and explores the neighbor nodes at the present depth prior to moving on to the nodes at the next depth level.',
-    'astar': 'A* is a graph traversal and path search algorithm which is often used in many fields of computer science due to its completeness, optimality, and optimal efficiency. It is a variant of Dijkstra\'s algorithm that uses heuristics to improve performance.',
-    'random_walk': 'Random Walk is a mathematical formalization of a path that consists of a succession of random steps. It is an algorithm that moves randomly from one node to another, ignoring if it has visited them before.'
+    'select': 'Please select an algorithm to see its description.',
+    'dfs': 'Depth-First Search (DFS) explores as far as possible along each branch before backtracking, using a stack (i.e. First-In First-Out) to remember paths.',
+    'bfs': 'Breadth-First Search (BFS) explores all nodes at the present depth level before moving on to nodes at the next depth level, using a queue (i.e. Last-In First-Out) to remember paths.',
+    'astar': 'A* Search uses a combination of path cost and a heuristic (i.e. minimum distance between start and goal) to find the shortest path to the goal. It uses a priority queue to explore paths with the lowest cost first.',
+    'random_walk': 'Random Walk explores the maze by randomly choosing the next position to move to, which may lead to revisiting the same position multiple times. I implemented this just for fun!'
+};
+
+window.onload = function() {
+    displayAlgorithmInfo(); // Ensure the default description is set on page load
 };
 
 canvas.addEventListener('click', draw);
@@ -163,7 +168,6 @@ function clearMaze() {
     drawGrid();
     console.log('Clearing maze');
     document.getElementById('visitedCount').innerText = 'Visited Squares: 0';
-    clearAlgorithmInfo();
 }
 
 function clearPath() {
@@ -217,6 +221,10 @@ function solveMaze() {
     }
     clearPath();
     const algorithm = document.getElementById('algorithmSelect').value;
+    if (algorithm === 'select') {
+        alert('Please select a search algorithm before solving the maze.');
+        return;
+    }
     const data = {
         maze,
         start: { x: start.x, y: start.y },
@@ -255,9 +263,6 @@ function displayAlgorithmInfo() {
     document.getElementById('algorithmInfo').innerText = info;
 }
 
-function clearAlgorithmInfo() {
-    document.getElementById('algorithmInfo').innerText = '';
-}
 
 function highlightButton(buttonLabel) {
     const buttons = document.querySelectorAll('.controls button');

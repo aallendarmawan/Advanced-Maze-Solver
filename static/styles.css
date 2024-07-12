@@ -8,20 +8,34 @@ body {
     background-color: #1e1e1e; /* Dark background */
     color: #f4f4f4; /* Light text color */
     margin: 0;
+    padding: 0 10px; /* Add some padding for mobile */
 }
 
 .container {
     text-align: center;
+    max-width: 100%;
+    overflow: hidden; /* Prevent overflow on mobile */
 }
 
 canvas {
     border: 1px solid #f4f4f4; /* Light border for canvas */
     margin-bottom: 20px;
     background-color: white; /* Keep the grid background white for contrast */
+    width: 100%; /* Make canvas responsive */
+    max-width: 500px; /* Ensure canvas doesn't get too large on desktop */
 }
 
 .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.control-group {
     margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 button, select, input {
@@ -29,6 +43,8 @@ button, select, input {
     background-color: #2e2e2e; /* Darker background for controls */
     color: #f4f4f4; /* Light text color */
     border: 1px solid #f4f4f4; /* Light border */
+    flex: 1 1 auto; /* Allow items to grow and shrink */
+    min-width: 120px; /* Set a minimum width for buttons and inputs */
 }
 
 button.selected {
@@ -36,8 +52,7 @@ button.selected {
 }
 
 footer {
-    position: absolute;
-    bottom: 10px;
+    margin-top: 20px;
     text-align: center;
     color: #f4f4f4; /* Light text color */
 }
@@ -49,4 +64,16 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+    .controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .control-group {
+        margin: 10px;
+    }
 }
